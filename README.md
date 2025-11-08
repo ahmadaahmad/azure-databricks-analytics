@@ -49,5 +49,15 @@ spark.conf.set(f"fs.azure.account.oauth.provider.type.{storage_account}.blob.cor
 spark.conf.set(f"fs.azure.account.oauth2.client.id.{storage_account}.blob.core.windows.net", client_id)
 spark.conf.set(f"fs.azure.account.oauth2.client.secret.{storage_account}.blob.core.windows.net", client_secret)
 spark.conf.set(f"fs.azure.account.oauth2.client.endpoint.{storage_account}.blob.core.windows.net", f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
+```
 
+## Usage
+###	1.	Copy data from Blob Storage to Data Lake Gen2 (Raw Layer):
+Run 01_Copy_Blob_to_Datalake notebook to read CSV file from Blob Storage and write to Data Lake raw zone with date-partitioned folders.
+###	2.	Verify copied files:
+Run 02_Verify_Datalake_Data to list files in the raw folder and preview the data.
+###	3.	Clean and transform data:
+Run 03_Transform_Clean_Data to perform example cleaning steps like dropping nulls and casting columns.
+###	4.	Save cleaned data as Parquet:
+Run 04_Save_Cleaned_As_Parquet to write transformed data into the processed folder in Parquet format optimized for analytics.
 
