@@ -36,6 +36,7 @@ Store your Azure AD Service Principal credentials securely:
 dbutils.secrets.put(scope="salesdbscope", key="client-id", string_value="<your-client-id>")
 dbutils.secrets.put(scope="salesdbscope", key="secret-id", string_value="<your-client-secret>")
 dbutils.secrets.put(scope="salesdbscope", key="tenant-id", string_value="<your-tenant-id>")
+```
 
 
 ### 2. Configure Spark OAuth settings in notebooks
