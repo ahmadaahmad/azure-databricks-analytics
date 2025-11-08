@@ -36,3 +36,17 @@ Store your Azure AD Service Principal credentials securely:
 dbutils.secrets.put(scope="salesdbscope", key="client-id", string_value="<your-client-id>")
 dbutils.secrets.put(scope="salesdbscope", key="secret-id", string_value="<your-client-secret>")
 dbutils.secrets.put(scope="salesdbscope", key="tenant-id", string_value="<your-tenant-id>")
+
+
+### 2. Configure Spark OAuth settings in notebooks
+
+Each notebook sets OAuth configs for Blob Storage and Data Lake Gen2 to enable token-based authentication:
+
+```python
+spark.conf.set(f"fs.azure.account.auth.type.{storage_account}.blob.core.windows.net", "OAuth")
+spark.conf.set(f"fs.azure.account.oauth.provider.type.{storage_account}.blob.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set(f"fs.azure.account.oauth2.client.id.{storage_account}.blob.core.windows.net", client_id)
+spark.conf.set(f"fs.azure.account.oauth2.client.secret.{storage_account}.blob.core.windows.net", client_secret)
+spark.conf.set(f"fs.azure.account.oauth2.client.endpoint.{storage_account}.blob.core.windows.net", f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
+
+
